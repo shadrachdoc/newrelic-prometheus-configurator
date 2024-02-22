@@ -1,0 +1,21 @@
+prometheus:
+  url: http://prometheus-server:9090
+
+metrics:
+  - name: prometheus_target_interval_length_seconds
+  - name: prometheus_tsdb_head_chunks 
+  - match: node_*
+
+relabelings:
+  - source_labels: [__name__]
+    target_label: __name__
+    regex: (.*)
+    replacement: nr.${1} 
+
+metric_renames:
+  prometheus_target_interval_length_seconds: nr.prometheus.target.interval
+
+cluster: default
+licenseKey: eu01xxcb701e419f80ecac7b2f5ea8e9FFFFNRAL
+
+nrStaging: false
